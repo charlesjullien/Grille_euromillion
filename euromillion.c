@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+int check_prev_grids(int	*tab);
+
 void	ft_putnbr(int nb)
 {
 	char		c;
@@ -196,10 +198,36 @@ int main ()
 {
 	int		tabnum[50];
 	int		tabstar[12];
+	int		tab[8];
+	int		i;
+	int		j;
 
+	i = 0;
+	j = 0;
 	tab_init(tabnum, tabstar);
 	get_numbers(tabnum, tabstar);
-	print_numbers(tabnum, tabstar);
-
+	while (i < 5)
+	{
+		while (tabnum[j] == 0)
+			j++;
+		tab[i] = tabnum[j];
+			i++;
+			j++;
+	}
+	tab[i] = 0;
+	i++;
+	j = 0;
+	while (i < 8)
+	{
+		while (tabstar[j] == 0)
+			j++;
+		tab[i] = tabstar[j];
+		i++;
+		j++;
+	}
+	if (check_prev_grids(tab) == 1)
+		print_numbers(tabnum, tabstar);
+	else
+		ft_putstr("La grille générée à l'execution du programme n'a pas pus s'afficher, car elle est déjà sortie lors d'un tirage dans le passé. Veuillez ré-executer le programme pour générer une nouvelle grille.");
 	return (0);
 }
